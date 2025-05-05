@@ -1,0 +1,65 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #fefcf7;
+  color: #2b2b2b;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #2e3b4e;
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Georgia', serif;
+  font-size: 2.5rem;
+}
+
+.tagline {
+  font-style: italic;
+  font-size: 1.2rem;
+}
+
+main {
+  padding: 2rem;
+}
+
+.intro, .features, .cta {
+  margin-bottom: 2rem;
+}
+
+.features ul {
+  list-style: none;
+  padding: 0;
+}
+
+.features li {
+  background: #e6e3d3;
+  margin: 0.5rem 0;
+  padding: 0.75rem;
+  border-left: 6px solid #2e3b4e;
+}
+
+button {
+  font-size: 1.2rem;
+  padding: 1rem 2rem;
+  background-color: #476c9b;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+button:hover {
+  background-color: #3c5b82;
+}
+
+footer {
+  background-color: #dcd2c0;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
