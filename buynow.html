@@ -36,6 +36,24 @@
       margin: 1rem 0;
     }
   </style>
+  <script>
+    window.onload = function() {
+      const ua = navigator.userAgent;
+      let suggestion = "Standard (Desktop/Laptop)";
+      if (ua.includes("ARM") || ua.includes("arm")) {
+        suggestion = "Lightweight (Raspberry Pi, ARM)";
+      } else if (ua.includes("Linux") && !ua.includes("arm")) {
+        suggestion = "High Performance (NUC/Server)";
+      }
+      document.getElementById('bundle-suggestion').innerText =
+        `Recommended download: ${suggestion}`;
+      document.getElementById('Platform_Suggestion').value = suggestion;
+    };
+
+    function setZohoAmount(amount) {
+      document.getElementById('Amount_Paid').value = amount;
+    }
+  </script>
 </head>
 <body>
   <nav>
@@ -48,62 +66,68 @@
   <h1>🛒 Pre-Order Vigilant Angel AI</h1>
   <p>Thank you for supporting the mission. This is a <strong>pre-order</strong> — your support will help finish development and protect the most vulnerable.</p>
 
-  <!-- Zoho Webform Start -->
   <div id='form-wrapper' style="background-color:#222; color:#eee; border-radius:8px; padding:2rem; margin-bottom:2rem; text-align:left">
-<!-- Note: Modified to match dark theme -->
-<div id='crmWebToEntityForm' class='zcwf_lblLeft crmWebToEntityForm' style='background-color: #222; color: #eee; max-width: 600px;'>
-  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-  <META HTTP-EQUIV='content-type' CONTENT='text/html;charset=UTF-8'>
-  <form id='webform6798434000000599026' action='https://crm.zoho.com/crm/WebToLeadForm' name='WebToLeads6798434000000599026' method='POST' onSubmit='javascript:document.charset="UTF-8"; return checkMandatory6798434000000599026()' accept-charset='UTF-8'>
-    <input type='text' style='display:none;' name='xnQsjsdp' value='de33956facde73d4b52543a3a4615a16ead4d4271be8a2a1eeda646de0f42099'>
-    <input type='hidden' name='zc_gad' id='zc_gad' value=''>
-    <input type='text' style='display:none;' name='xmIwtLD' value='dcda12a6073a99b587540735b8eed549095e28387436ae303aec6cf56598690ab28c5bdd94c4eb7968c0bd94dcf07b7f'>
-    <input type='text' style='display:none;' name='actionType' value='TGVhZHM='>
-    <input type='text' style='display:none;' name='returnURL' value='https://vigilantangel.ai/buy.html#thanks'>
-    <div class='zcwf_title' style='font-family: Arial; color: #eee;'>Vigilant Angel PreOrder</div>
+    <div id='crmWebToEntityForm' class='zcwf_lblLeft crmWebToEntityForm' style='background-color: #222; color: #eee; max-width: 600px;'>
+      <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+      <META HTTP-EQUIV='content-type' CONTENT='text/html;charset=UTF-8'>
+      <form id='webform6798434000000599026' action='https://crm.zoho.com/crm/WebToLeadForm' name='WebToLeads6798434000000599026' method='POST' onSubmit='javascript:document.charset="UTF-8"; return checkMandatory6798434000000599026()' accept-charset='UTF-8'>
+        <input type='text' style='display:none;' name='xnQsjsdp' value='de33956facde73d4b52543a3a4615a16ead4d4271be8a2a1eeda646de0f42099'>
+        <input type='hidden' name='zc_gad' id='zc_gad' value=''>
+        <input type='text' style='display:none;' name='xmIwtLD' value='dcda12a6073a99b587540735b8eed549095e28387436ae303aec6cf56598690ab28c5bdd94c4eb7968c0bd94dcf07b7f'>
+        <input type='text' style='display:none;' name='actionType' value='TGVhZHM='>
+        <input type='text' style='display:none;' name='returnURL' value='https://vigilantangel.ai/buy.html#thanks'>
+        
+        <input type='hidden' id='Platform_Suggestion' name='Platform Suggestion' value=''>
+        <input type='hidden' id='Amount_Paid' name='Amount Paid' value=''>
 
-    <div class='zcwf_row'>
-      <div class='zcwf_col_lab' style='color:#ccc;'>First Name</div>
-      <div class='zcwf_col_fld'>
-        <input type='text' id='First_Name' name='First Name' maxlength='40' style='width: 100%; background-color: #333; color: #eee; border: 1px solid #555;'>
-      </div>
-    </div>
+        <div class='zcwf_title' style='font-family: Arial; color: #eee;'>Vigilant Angel PreOrder</div>
 
-    <div class='zcwf_row'>
-      <div class='zcwf_col_lab' style='color:#ccc;'>Last Name <span style='color:red;'>*</span></div>
-      <div class='zcwf_col_fld'>
-        <input type='text' id='Last_Name' name='Last Name' maxlength='80' style='width: 100%; background-color: #333; color: #eee; border: 1px solid #555;'>
-      </div>
-    </div>
+        <div class='zcwf_row'>
+          <div class='zcwf_col_lab' style='color:#ccc;'>First Name</div>
+          <div class='zcwf_col_fld'>
+            <input type='text' id='First_Name' name='First Name' maxlength='40' style='width: 100%; background-color: #333; color: #eee; border: 1px solid #555;'>
+          </div>
+        </div>
 
-    <div class='zcwf_row'>
-      <div class='zcwf_col_lab' style='color:#ccc;'>Email <span style='color:red;'>*</span></div>
-      <div class='zcwf_col_fld'>
-        <input type='text' id='Email' name='Email' maxlength='100' style='width: 100%; background-color: #333; color: #eee; border: 1px solid #555;'>
-      </div>
-    </div>
+        <div class='zcwf_row'>
+          <div class='zcwf_col_lab' style='color:#ccc;'>Last Name <span style='color:red;'>*</span></div>
+          <div class='zcwf_col_fld'>
+            <input type='text' id='Last_Name' name='Last Name' maxlength='80' style='width: 100%; background-color: #333; color: #eee; border: 1px solid #555;'>
+          </div>
+        </div>
 
-    <div class='zcwf_row' style='display:none;'>
-      <div class='zcwf_col_lab'>Company</div>
-      <div class='zcwf_col_fld'>
-        <input type='text' id='Company' name='Company' value='Individual'>
-      </div>
-    </div>
+        <div class='zcwf_row'>
+          <div class='zcwf_col_lab' style='color:#ccc;'>Email <span style='color:red;'>*</span></div>
+          <div class='zcwf_col_fld'>
+            <input type='text' id='Email' name='Email' maxlength='100' style='width: 100%; background-color: #333; color: #eee; border: 1px solid #555;'>
+          </div>
+        </div>
 
-    <div class='zcwf_row'>
-      <div class='zcwf_col_lab'></div>
-      <div class='zcwf_col_fld'>
-        <input type='submit' class='zcwf_button' value='Submit' style='background-color: #4caf50; color: #fff; padding: 0.5rem 1rem;'>
-      </div>
+        <div class='zcwf_row' style='display:none;'>
+          <div class='zcwf_col_lab'>Company</div>
+          <div class='zcwf_col_fld'>
+            <input type='text' id='Company' name='Company' value='Individual'>
+          </div>
+        </div>
+
+        <div class='zcwf_row'>
+          <div class='zcwf_col_lab'></div>
+          <div class='zcwf_col_fld'>
+            <input type='submit' class='zcwf_button' value='Submit' style='background-color: #4caf50; color: #fff; padding: 0.5rem 1rem;'>
+          </div>
+        </div>
+      </form>
     </div>
-  </form>
-</div>
-</div>
-<!-- Zoho Webform End -->
+  </div>
+
+  <div id="bundle-suggestion" style="margin-top:1rem; font-style:italic; color:#ccc;">
+    Detecting your platform...
+  </div>
 
   <div class="paypal-btns">
     <!-- Pre-Order Button -->
-    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank"
+          onsubmit="setZohoAmount('49.00')">
       <input type="hidden" name="cmd" value="_xclick">
       <input type="hidden" name="business" value="stephan@hiddenacres.biz">
       <input type="hidden" name="item_name" value="Vigilant Angel AI – Pre-Order">
