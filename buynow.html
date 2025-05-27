@@ -42,27 +42,44 @@
     }
   </style>
   <script>
-    let suggestion = "Standard (Desktop/Laptop)";
     window.onload = function() {
       const ua = navigator.userAgent;
+      const memory = navigator.deviceMemory ? `${navigator.deviceMemory} GB` : "Unknown";
+      let cpu = "Unknown";
+      let os = "Unknown";
+      let suggestion = "Standard (Desktop/Laptop)";
+
+      if (ua.includes("Win")) os = "Windows";
+      else if (ua.includes("Mac")) os = "macOS";
+      else if (ua.includes("Linux")) os = "Linux";
+
       if (ua.includes("ARM") || ua.includes("arm")) {
+        cpu = "ARM";
         suggestion = "Lightweight (Raspberry Pi, ARM)";
-      } else if (ua.includes("Linux") && !ua.includes("arm")) {
-        suggestion = "High Performance (NUC/Server)";
+      } else if (ua.includes("x86_64") || ua.includes("Win64") || ua.includes("Intel") || ua.includes("AMD")) {
+        cpu = "Intel/AMD x86_64";
+        if (os === "Linux") suggestion = "High Performance (NUC/Server)";
       }
-      document.getElementById('bundle-suggestion').innerText =
-        `Recommended download: ${suggestion}`;
+
+      document.getElementById('bundle-suggestion').innerHTML = `
+        <strong>Recommended Download:</strong> ${suggestion}<br>
+        <strong>Detected System Details:</strong><br>
+        - OS: ${os}<br>
+        - CPU: ${cpu}<br>
+        - Reported RAM: ${memory}<br>
+        <small>We share this with you for full transparency — to explain why we recommend the right-sized model for best performance. A valid email is required to receive your secure Cloudflare CDN download link.</small>
+      `;
 
       document.getElementById('Platform_Suggestion').value = suggestion;
 
-      // Setup form listeners
+      // Setup form listeners for validation
       const firstName = document.getElementById('First_Name');
       const lastName = document.getElementById('Last_Name');
       const email = document.getElementById('Email');
       const preorderBtn = document.getElementById('preorder-button');
 
       function validate() {
-        const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value);
+        const validEmail = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email.value);
         if (lastName.value.trim() !== '' && validEmail) {
           preorderBtn.disabled = false;
           preorderBtn.classList.remove('disabled-button');
@@ -150,11 +167,6 @@
   <div id="bundle-suggestion" style="margin-top:1rem; font-style:italic; color:#ccc;">
     Detecting your platform...
   </div>
-  <p style="font-size:0.9rem; color:#aaa;">
-    <strong>Details collected:</strong> Name, email, and platform suggestion.<br>
-    This ensures <em>full transparency</em> — we only gather what’s needed to optimize your download and performance.<br>
-    A valid email is required to receive your secure Cloudflare CDN download link.
-  </p>
 
   <div class="paypal-btns">
     <!-- Pre-Order Button -->
